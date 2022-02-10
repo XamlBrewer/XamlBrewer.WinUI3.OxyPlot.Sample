@@ -12,8 +12,13 @@
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\About.png" />
+    <None Remove="Assets\Gallery.png" />
+    <None Remove="Assets\Home.png" />
+    <None Remove="Assets\Interaction.png" />
     <None Remove="Views\AboutPage.xaml" />
     <None Remove="Views\HomePage.xaml" />
+    <None Remove="Views\InteractivePage.xaml" />
     <None Remove="Views\MultiPage.xaml" />
   </ItemGroup>
 
@@ -40,6 +45,11 @@
        package has not yet been restored -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\InteractivePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\MultiPage.xaml">

@@ -8,7 +8,9 @@
       mc:Ignorable="d"
       Background="Transparent">
 
-    <Grid Padding="0 0 0 60">
+    <Grid Margin="0 0 0 80"
+          ColumnSpacing="0"
+          RowSpacing="0">
         <oxy:PlotView Model="{x:Bind Model, Mode=OneWay}"
                       Background="Transparent" />
     </Grid>

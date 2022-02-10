@@ -11,20 +11,6 @@
           Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
           VerticalAlignment="Stretch"
           HorizontalAlignment="Stretch">
-        <!--<Grid.Resources>
-            <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground"
-                          TintColor="{StaticResource SystemChromeMediumLowColor}"
-                          TintOpacity="0"
-                          TintLuminosityOpacity="0"
-                          FallbackColor="{StaticResource SystemChromeMediumLowColor}" />
-        </Grid.Resources>-->
-
-        <!-- Background -->
-        <!--<Image Stretch="UniformToFill"
-               Opacity="{ThemeResource BackgroundOpacity}"
-               Source="/Assets/Background.jpg"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Center" />-->
 
         <!-- Main Beef -->
         <NavigationView x:Name="NavigationView"
@@ -35,16 +21,32 @@
                         Background="Transparent"
                         IsSettingsVisible="False"
                         Margin="0">
-            <NavigationView.PaneCustomContent>
+            <!--<NavigationView.PaneCustomContent>
                 <HyperlinkButton NavigateUri="https://xamlbrewer.wordpress.com"
                                  Margin="8 0">Blog post</HyperlinkButton>
-            </NavigationView.PaneCustomContent>
+            </NavigationView.PaneCustomContent>-->
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Home"
                                     Tag="XamlBrewer.WinUI3.OxyPlot.Sample.Views.HomePage"
-                                    ToolTipService.ToolTip="Home">
+                                    ToolTipService.ToolTip="Hello World">
                     <NavigationViewItem.Icon>
                         <BitmapIcon UriSource="/Assets/Home.png"
+                                    ShowAsMonochrome="False" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Gallery"
+                                    Tag="XamlBrewer.WinUI3.OxyPlot.Sample.Views.MultiPage"
+                                    ToolTipService.ToolTip="Gallery">
+                    <NavigationViewItem.Icon>
+                        <BitmapIcon UriSource="/Assets/Gallery.png"
+                                    ShowAsMonochrome="False" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Interactive Model"
+                                    Tag="XamlBrewer.WinUI3.OxyPlot.Sample.Views.InteractivePage"
+                                    ToolTipService.ToolTip="Interactive Model">
+                    <NavigationViewItem.Icon>
+                        <BitmapIcon UriSource="/Assets/Interaction.png"
                                     ShowAsMonochrome="False" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
@@ -117,7 +119,7 @@
                                Padding="0"
                                Margin="48 0 8 12">
                                     <Run Text="XAML"
-                                         Foreground="{StaticResource SystemAccentColor}" />
+                                         Foreground="{ThemeResource SystemAccentColor}" />
                                     <Run Text="Brewer"
                                          Foreground="DimGray"
                                          FontWeight="Light" />

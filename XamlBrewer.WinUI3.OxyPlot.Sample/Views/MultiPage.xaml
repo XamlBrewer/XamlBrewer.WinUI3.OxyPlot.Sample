@@ -1,14 +1,282 @@
-﻿<Page
-    x:Class="XamlBrewer.WinUI3.OxyPlot.Sample.Views.MultiPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:XamlBrewer.WinUI3.OxyPlot.Sample.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="Transparent">
+﻿<Page x:Class="XamlBrewer.WinUI3.OxyPlot.Sample.Views.MultiPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:XamlBrewer.WinUI3.OxyPlot.Sample.Views"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:viewmodels="using:XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels"
+      xmlns:oxyplot="using:OxyPlot"
+      mc:Ignorable="d"
+      Background="Transparent">
 
-    <Grid>
+    <Page.DataContext>
+        <viewmodels:MultiPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
 
-    </Grid>
+    <GridView x:Name="GridView"
+              SelectionMode="None"
+              VerticalAlignment="Stretch"
+              Margin="0">
+        <GridView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <VariableSizedWrapGrid ItemHeight="360"
+                                       ItemWidth="420"
+                                       Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </GridView.ItemsPanel>
+
+        <!-- Bar Series -->
+        <GridViewItem CornerRadius="4"
+                      Padding="0"
+                      Margin="0 0 20 20">
+            <GridViewItem.Transitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+            </GridViewItem.Transitions>
+            <Grid Width="400"
+                  Height="340"
+                  Margin="0"
+                  CornerRadius="4"
+                  RowDefinitions="auto, *">
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".2"
+                        Grid.RowSpan="10" />
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".5" />
+
+                <TextBlock Text="Bar"
+                           Padding="0"
+                           HorizontalAlignment="Stretch"
+                           FontSize="16"
+                           Margin="10 5" />
+
+                <oxyplot:PlotView Model="{x:Bind ViewModel.BarSeriesModel, Mode=OneWay}"
+                                  Background="Transparent"
+                                  Grid.Row="1" />
+            </Grid>
+        </GridViewItem>
+
+        <!-- Heat Map (Bitmap) -->
+        <GridViewItem CornerRadius="4"
+                      Padding="0"
+                      Margin="0 0 20 20">
+            <GridViewItem.Transitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+            </GridViewItem.Transitions>
+            <Grid Width="400"
+                  Height="340"
+                  Margin="0"
+                  CornerRadius="4"
+                  RowDefinitions="auto, *">
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".2"
+                        Grid.RowSpan="10" />
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".5" />
+
+                <TextBlock Text="Bitmap Heatmap"
+                           Padding="0"
+                           HorizontalAlignment="Stretch"
+                           FontSize="16"
+                           Margin="10 5" />
+
+                <oxyplot:PlotView Model="{x:Bind ViewModel.BitmapHeatMapSeriesModel, Mode=OneWay}"
+                                  Background="Transparent"
+                                  Grid.Row="1" />
+            </Grid>
+        </GridViewItem>
+
+        <!-- Heat Map (Rectangular) -->
+        <GridViewItem CornerRadius="4"
+                      Padding="0"
+                      Margin="0 0 20 20">
+            <GridViewItem.Transitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+            </GridViewItem.Transitions>
+            <Grid Width="400"
+                  Height="340"
+                  Margin="0"
+                  CornerRadius="4"
+                  RowDefinitions="auto, *">
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".2"
+                        Grid.RowSpan="10" />
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".5" />
+
+                <TextBlock Text="Rectangular Heatmap"
+                           Padding="0"
+                           HorizontalAlignment="Stretch"
+                           FontSize="16"
+                           Margin="10 5" />
+
+                <oxyplot:PlotView Model="{x:Bind ViewModel.RectangularHeatMapSeriesModel, Mode=OneWay}"
+                                  Background="Transparent"
+                                  Grid.Row="1" />
+            </Grid>
+        </GridViewItem>
+
+        <!-- Contour Series -->
+        <GridViewItem CornerRadius="4"
+                      Padding="0"
+                      Margin="0 0 20 20">
+            <GridViewItem.Transitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+            </GridViewItem.Transitions>
+            <Grid Width="400"
+                  Height="340"
+                  Margin="0"
+                  CornerRadius="4"
+                  RowDefinitions="auto, *">
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".2"
+                        Grid.RowSpan="10" />
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".5" />
+
+                <TextBlock Text="Contour"
+                           Padding="0"
+                           HorizontalAlignment="Stretch"
+                           FontSize="16"
+                           Margin="10 5" />
+
+                <oxyplot:PlotView Model="{x:Bind ViewModel.ContourSeriesModel, Mode=OneWay}"
+                                  Background="Transparent"
+                                  Grid.Row="1" />
+            </Grid>
+        </GridViewItem>
+
+        <!-- Function Series -->
+        <GridViewItem CornerRadius="4"
+                      Padding="0"
+                      Margin="0 0 20 20">
+            <GridViewItem.Transitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+            </GridViewItem.Transitions>
+            <Grid Width="400"
+                  Height="340"
+                  Margin="0"
+                  CornerRadius="4"
+                  RowDefinitions="auto, *">
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".2"
+                        Grid.RowSpan="10" />
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".5" />
+
+                <TextBlock Text="Functions"
+                           Padding="0"
+                           HorizontalAlignment="Stretch"
+                           FontSize="16"
+                           Margin="10 5" />
+
+                <oxyplot:PlotView Model="{x:Bind ViewModel.FunctionSeriesModel, Mode=OneWay}"
+                                  Background="Transparent"
+                                  Grid.Row="1" />
+            </Grid>
+        </GridViewItem>
+
+        <!-- Pie Series -->
+        <GridViewItem CornerRadius="4"
+                      Padding="0"
+                      Margin="0 0 20 20">
+            <GridViewItem.Transitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+            </GridViewItem.Transitions>
+            <Grid Width="400"
+                  Height="340"
+                  Margin="0"
+                  CornerRadius="4"
+                  RowDefinitions="auto, *">
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".2"
+                        Grid.RowSpan="10" />
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".5" />
+
+                <TextBlock Text="Pie"
+                           Padding="0"
+                           HorizontalAlignment="Stretch"
+                           FontSize="16"
+                           Margin="10 5" />
+
+                <oxyplot:PlotView Model="{x:Bind ViewModel.PieSeriesModel, Mode=OneWay}"
+                                  Background="Transparent"
+                                  Margin="5"
+                                  Grid.Row="1" />
+            </Grid>
+        </GridViewItem>
+
+        <!-- Pie Series -->
+        <GridViewItem CornerRadius="4"
+                      Padding="0"
+                      Margin="0 0 20 20">
+            <GridViewItem.Transitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+            </GridViewItem.Transitions>
+            <Grid Width="400"
+                  Height="340"
+                  Margin="0"
+                  CornerRadius="4"
+                  RowDefinitions="auto, *">
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".2"
+                        Grid.RowSpan="10" />
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".5" />
+
+                <TextBlock Text="Stem"
+                           Padding="0"
+                           HorizontalAlignment="Stretch"
+                           FontSize="16"
+                           Margin="10 5" />
+
+                <oxyplot:PlotView Model="{x:Bind ViewModel.StemSeriesModel, Mode=OneWay}"
+                                  Background="Transparent"
+                                  Margin="5"
+                                  Grid.Row="1" />
+            </Grid>
+        </GridViewItem>
+    </GridView>
 </Page>
