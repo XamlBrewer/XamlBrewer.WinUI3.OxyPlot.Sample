@@ -50,6 +50,14 @@
                                     ShowAsMonochrome="False" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem Content="Theming"
+                                    Tag="XamlBrewer.WinUI3.OxyPlot.Sample.Views.ThemingPage"
+                                    ToolTipService.ToolTip="Theming">
+                    <NavigationViewItem.Icon>
+                        <BitmapIcon UriSource="/Assets/Theming.png"
+                                    ShowAsMonochrome="False" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem Content="About"

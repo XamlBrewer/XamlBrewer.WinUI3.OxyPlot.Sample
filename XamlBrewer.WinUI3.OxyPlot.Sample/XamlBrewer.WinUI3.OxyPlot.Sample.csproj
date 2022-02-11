@@ -16,10 +16,12 @@
     <None Remove="Assets\Gallery.png" />
     <None Remove="Assets\Home.png" />
     <None Remove="Assets\Interaction.png" />
+    <None Remove="Assets\Theming.png" />
     <None Remove="Views\AboutPage.xaml" />
     <None Remove="Views\HomePage.xaml" />
     <None Remove="Views\InteractivePage.xaml" />
     <None Remove="Views\MultiPage.xaml" />
+    <None Remove="Views\ThemingPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +49,10 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\ThemingPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\InteractivePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
