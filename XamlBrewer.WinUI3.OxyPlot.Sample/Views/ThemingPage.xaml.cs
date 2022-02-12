@@ -108,7 +108,10 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
 
                 var outliers = values.Where(v => v > upperWhisker || v < lowerWhisker).ToList();
 
-                s1.Items.Add(new BoxPlotItem(x, lowerWhisker, firstQuartil, median, thirdQuartil, upperWhisker) { Outliers = outliers });
+                s1.Items.Add(new BoxPlotItem(x, lowerWhisker, firstQuartil, median, thirdQuartil, upperWhisker) 
+                { 
+                    Outliers = outliers
+                });
             }
 
             boxPlotModel.Series.Add(s1);
@@ -177,6 +180,9 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
                     axis.AxislineColor = OxyColors.Red; // Doesn't seem to work.
                     //axis.color
                 }
+                var series = boxPlotModel.Series[0] as BoxPlotSeries;
+                series.Stroke = OxyColors.LightSlateGray;
+                series.Fill = OxyColors.LightSteelBlue;
             }
             else
             {
@@ -196,6 +202,9 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
                     axis.TicklineColor = OxyColors.Beige;
                     axis.AxislineColor = OxyColors.Beige;
                 }
+                var series = boxPlotModel.Series[0] as BoxPlotSeries;
+                series.Fill = OxyColors.LightSlateGray;
+                series.Stroke = OxyColors.LightSteelBlue;
             }
 
             helloWorldmodel.InvalidatePlot(false);
