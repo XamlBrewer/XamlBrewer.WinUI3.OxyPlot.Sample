@@ -10,10 +10,13 @@
       Background="Transparent">
 
     <Grid Margin="0 0 0 80"
-          ColumnSpacing="0"
-          RowSpacing="0">
-        <oxy:PlotView Model="{x:Bind Model, Mode=OneWay}"
-                      Background="Transparent">
+          RowDefinitions="2*, *"
+          ColumnDefinitions="*, *"
+          ColumnSpacing="5"
+          RowSpacing="5">
+        <oxy:PlotView Model="{x:Bind HelloWorldModel}"
+                      Background="Transparent"
+                      Grid.ColumnSpan="3">
             <oxy:PlotView.DefaultTrackerTemplate>
                 <ControlTemplate>
                     <oxy1:TrackerControl Position="{Binding Position}"
@@ -27,5 +30,8 @@
                 </ControlTemplate>
             </oxy:PlotView.DefaultTrackerTemplate>
         </oxy:PlotView>
+        <oxy:PlotView Model="{x:Bind BoxPlotModel}"
+                      Background="Transparent"
+                      Grid.Row="1" />
     </Grid>
 </Page>

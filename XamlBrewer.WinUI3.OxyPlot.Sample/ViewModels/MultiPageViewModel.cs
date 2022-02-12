@@ -18,6 +18,8 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
             {
                 var model = new PlotModel(); // { Title = "Cake Type Popularity" };
 
+                model.PlotAreaBorderColor = OxyColors.Transparent;
+
                 //generate a random percentage distribution between the 5
                 //cake-types (see axis below)
                 var rand = new Random();
@@ -66,6 +68,8 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
             get {
                 var model = new PlotModel(); // { Title = "ContourSeries" };
 
+                model.PlotAreaBorderColor = OxyColors.Transparent;
+
                 double x0 = -3.1;
                 double x1 = 3.1;
                 double y0 = -3;
@@ -96,6 +100,8 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
             get
             {
                 var model = new PlotModel(); // { Title = "Heatmap" };
+
+                model.PlotAreaBorderColor = OxyColors.Transparent;
 
                 // Color axis (the X and Y axes are generated automatically)
                 model.Axes.Add(new LinearColorAxis
@@ -141,6 +147,8 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
             get
             {
                 var model = new PlotModel(); // { Title = "Hmmmm ... cookies" };
+
+                model.PlotAreaBorderColor = OxyColors.Transparent;
 
                 // Weekday axis (horizontal)
                 model.Axes.Add(new CategoryAxis
@@ -219,6 +227,8 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
             {
                 var model = new PlotModel(); // { Title = "Nana nana nana nana nana nana nana nana" };
 
+                model.PlotAreaBorderColor = OxyColors.Transparent;
+
                 Func<double, double> batFn1 = (x) => 2 * Math.Sqrt(-Math.Abs(Math.Abs(x) - 1) * Math.Abs(3 - Math.Abs(x)) / ((Math.Abs(x) - 1) * (3 - Math.Abs(x)))) * (1 + Math.Abs(Math.Abs(x) - 3) / (Math.Abs(x) - 3)) * Math.Sqrt(1 - Math.Pow((x / 7), 2)) + (5 + 0.97 * (Math.Abs(x - 0.5) + Math.Abs(x + 0.5)) - 3 * (Math.Abs(x - 0.75) + Math.Abs(x + 0.75))) * (1 + Math.Abs(1 - Math.Abs(x)) / (1 - Math.Abs(x)));
                 Func<double, double> batFn2 = (x) => -3 * Math.Sqrt(1 - Math.Pow((x / 7), 2)) * Math.Sqrt(Math.Abs(Math.Abs(x) - 4) / (Math.Abs(x) - 4));
                 Func<double, double> batFn3 = (x) => Math.Abs(x / 2) - 0.0913722 * (Math.Pow(x, 2)) - 3 + Math.Sqrt(1 - Math.Pow((Math.Abs(Math.Abs(x) - 2) - 1), 2));
@@ -241,6 +251,8 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
             get {
                 var model = new PlotModel(); // { Title = "Pie Sample1" };
 
+                model.PlotAreaBorderColor = OxyColors.Transparent;
+
                 dynamic seriesP1 = new PieSeries { StrokeThickness = 2.0, InsideLabelPosition = 0.8, AngleSpan = 360, StartAngle = 0 };
 
                 seriesP1.Slices.Add(new PieSlice("Africa", 1030) { IsExploded = false, Fill = OxyColors.PaleVioletRed });
@@ -259,6 +271,8 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
         {
             get {
                 var model = new PlotModel(); // { Title = "Trigonometric functions" };
+
+                model.PlotAreaBorderColor = OxyColors.Transparent;
 
                 var start = -Math.PI;
                 var end = Math.PI;

@@ -15,6 +15,7 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
         public PlotModel Model { get; private set; } = new PlotModel
         {
             Title = "Hello WinUI 3",
+            PlotAreaBorderColor = OxyColors.Transparent,
             Axes =
             {
                 new LinearAxis { Position = AxisPosition.Bottom },

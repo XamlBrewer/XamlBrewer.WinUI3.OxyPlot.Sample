@@ -4,12 +4,16 @@ using Microsoft.UI.Xaml.Navigation;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
 {
     public sealed partial class ThemingPage : Page
     {
-        private PlotModel model;
+        private PlotModel helloWorldmodel;
+        private PlotModel boxPlotModel;
 
         public ThemingPage()
         {
@@ -36,11 +40,13 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
             base.OnNavigatedFrom(e);
         }
 
-        public PlotModel Model => model;
+        public PlotModel HelloWorldModel => helloWorldmodel;
+
+        public PlotModel BoxPlotModel => boxPlotModel;
 
         private void InitializePlotModel()
         {
-            model = new PlotModel
+            helloWorldmodel = new PlotModel
             {
                 Title = "Hello WinUI 3",
                 Axes =
@@ -65,6 +71,63 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
                 }
             }
             };
+
+            const int boxes = 10;
+
+            boxPlotModel = new PlotModel(); // (string.Format("BoxPlot (n={0})", boxes)) { LegendPlacement = LegendPlacement.Outside };
+
+            var s1 = new BoxPlotSeries
+            {
+                Title = "BoxPlotSeries",
+                BoxWidth = 0.3
+            };
+
+            var random = new Random();
+            for (var i = 0; i < boxes; i++)
+            {
+                double x = i;
+                var points = 5 + random.Next(15);
+                var values = new List<double>();
+                for (var j = 0; j < points; j++)
+                {
+                    values.Add(random.Next(0, 20));
+                }
+
+                values.Sort();
+                var median = GetMedian(values);
+                int r = values.Count % 2;
+                double firstQuartil = GetMedian(values.Take((values.Count + r) / 2));
+                double thirdQuartil = GetMedian(values.Skip((values.Count - r) / 2));
+
+                var iqr = thirdQuartil - firstQuartil;
+                var step = iqr * 1.5;
+                var upperWhisker = thirdQuartil + step;
+                upperWhisker = values.Where(v => v <= upperWhisker).Max();
+                var lowerWhisker = firstQuartil - step;
+                lowerWhisker = values.Where(v => v >= lowerWhisker).Min();
+
+                var outliers = values.Where(v => v > upperWhisker || v < lowerWhisker).ToList();
+
+                s1.Items.Add(new BoxPlotItem(x, lowerWhisker, firstQuartil, median, thirdQuartil, upperWhisker) { Outliers = outliers });
+            }
+
+            boxPlotModel.Series.Add(s1);
+            boxPlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left });
+            boxPlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, MinimumPadding = 0.1, MaximumPadding = 0.1 });
+
+        }
+
+        private static double GetMedian(IEnumerable<double> values)
+        {
+            var sortedInterval = new List<double>(values);
+            sortedInterval.Sort();
+            var count = sortedInterval.Count;
+            if (count % 2 == 1)
+            {
+                return sortedInterval[(count - 1) / 2];
+            }
+
+            return 0.5 * sortedInterval[count / 2] + 0.5 * sortedInterval[(count / 2) - 1];
         }
 
         private void ThemingPage_ActualThemeChanged(FrameworkElement sender, object args)
@@ -97,18 +160,46 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
 
             if (theme == ElementTheme.Light)
             {
-                model.TextColor = OxyColors.DimGray;
-                model.PlotAreaBorderColor = OxyColors.DimGray;
+                helloWorldmodel.TextColor = OxyColors.DimGray;
+                helloWorldmodel.PlotAreaBorderColor = OxyColors.DimGray;
+                foreach (var axis in helloWorldmodel.Axes)
+                {
+                    axis.TicklineColor = OxyColors.DimGray;
+                    axis.AxislineColor = OxyColors.DimGray;
+                }
                 // model.DefaultColors = OxyPalettes.Cool(model.DefaultColors.Count).Colors;
+
+                boxPlotModel.TextColor = OxyColors.DimGray;
+                boxPlotModel.PlotAreaBorderColor = OxyColors.Transparent;
+                foreach (var axis in boxPlotModel.Axes)
+                {
+                    axis.TicklineColor = OxyColors.DimGray;
+                    axis.AxislineColor = OxyColors.Red; // Doesn't seem to work.
+                    //axis.color
+                }
             }
             else
             {
-                model.TextColor = OxyColors.Beige;
-                model.PlotAreaBorderColor = OxyColors.Beige;
+                helloWorldmodel.TextColor = OxyColors.Beige;
+                helloWorldmodel.PlotAreaBorderColor = OxyColors.Beige;
+                foreach (var axis in helloWorldmodel.Axes)
+                {
+                    axis.TicklineColor = OxyColors.Beige;
+                    axis.AxislineColor = OxyColors.Beige;
+                }
                 // model.DefaultColors = OxyPalettes.Hot(model.DefaultColors.Count).Colors;
+
+                boxPlotModel.TextColor = OxyColors.Beige;
+                boxPlotModel.PlotAreaBorderColor = OxyColors.Transparent;
+                foreach (var axis in boxPlotModel.Axes)
+                {
+                    axis.TicklineColor = OxyColors.Beige;
+                    axis.AxislineColor = OxyColors.Beige;
+                }
             }
 
-            model.InvalidatePlot(false);
+            helloWorldmodel.InvalidatePlot(false);
+            boxPlotModel.InvalidatePlot(true);
         }
     }
 }
