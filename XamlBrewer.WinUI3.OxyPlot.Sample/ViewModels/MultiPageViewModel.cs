@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using OxyPlot;
 using OxyPlot.Axes;
+using OxyPlot.Legends;
 using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
@@ -296,6 +297,94 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
                 sinStemSeries.Points.AddRange(sinData);
 
                 model.Series.Add(sinStemSeries);
+
+                return model;
+            }
+        }
+
+        public PlotModel TwoColorAreaSeriesModel
+        {
+            get
+            {
+                var model = new PlotModel(); // { Title = "TwoColorAreaSeries" };
+
+                model.PlotAreaBorderThickness = new OxyThickness(0);
+
+                //var l = new Legend
+                //{
+                //    LegendSymbolLength = 24
+                //};
+
+                //model.Legends.Add(l);
+
+                var s1 = new TwoColorAreaSeries
+                {
+                    // Title = "Temperature at Eidesmoen, December 1986.",
+                    TrackerFormatString = "December {2:0}: {4:0.0} °C",
+                    Color = OxyColors.Black,
+                    Color2 = OxyColors.Brown,
+                    MarkerFill = OxyColors.Red,
+                    Fill = OxyColors.Tomato,
+                    Fill2 = OxyColors.LightBlue,
+                    MarkerFill2 = OxyColors.Blue,
+                    MarkerStroke = OxyColors.Brown,
+                    MarkerStroke2 = OxyColors.Black,
+                    StrokeThickness = 2,
+                    Limit = 0,
+                    MarkerType = MarkerType.Circle,
+                    MarkerSize = 3,
+                };
+
+                var temperatures = new[] { 5, 0, 7, 7, 4, 3, 5, 5, 11, 4, 2, 3, 2, 1, 0, 2, -1, 0, 0, -3, -6, -13, -10, -10, 0, -4, -5, -4, 3, 0, -5 };
+
+                for (int i = 0; i < temperatures.Length; i++)
+                {
+                    s1.Points.Add(new DataPoint(i + 1, temperatures[i]));
+                }
+
+                model.Series.Add(s1);
+                model.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "Temperature", Unit = "°C", ExtraGridlines = new[] { 0.0 } });
+                model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "Date" });
+
+                return model;
+            }
+        }
+
+        public PlotModel MultiValueAxesBarModel
+        {
+            get
+            {
+                var model = new PlotModel(); // { Title = "Multiple Value Axes" };
+
+                model.PlotAreaBorderColor = OxyColors.Transparent;
+
+                model.DefaultColors = OxyPalettes.Viridis(4).Colors;
+
+                var categoryAxis = new CategoryAxis { Position = AxisPosition.Left };
+                var valueAxis1 = new LinearAxis { /* Title = "Value Axis 1", */ Position = AxisPosition.Bottom, MinimumPadding = 0.06, MaximumPadding = 0.06, ExtraGridlines = new[] { 0d }, EndPosition = .5, Key = "x1" };
+                var valueAxis2 = new LinearAxis { /* Title = "Value Axis 2", */ Position = AxisPosition.Bottom, MinimumPadding = 0.06, MaximumPadding = 0.06, ExtraGridlines = new[] { 0d }, StartPosition = .5, Key = "x2" };
+                model.Axes.Add(categoryAxis);
+                model.Axes.Add(valueAxis1);
+                model.Axes.Add(valueAxis2);
+
+                var series = new List<BarSeries>
+            {
+                new BarSeries { XAxisKey = "x1" },
+                new BarSeries { XAxisKey = "x1" },
+                new BarSeries { XAxisKey = "x2" },
+                new BarSeries { XAxisKey = "x2" },
+            };
+
+                var rnd = new Random(1);
+                foreach (var s in series)
+                {
+                    for (var i = 0; i < 4; i++)
+                    {
+                        s.Items.Add(new BarItem() { Value = rnd.Next(-100, 100) });
+                    }
+
+                    model.Series.Add(s);
+                }
 
                 return model;
             }

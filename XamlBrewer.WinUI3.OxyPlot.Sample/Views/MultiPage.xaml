@@ -278,5 +278,79 @@
                                   Grid.Row="1" />
             </Grid>
         </GridViewItem>
+
+        <!-- TwoColorArea Series -->
+        <GridViewItem CornerRadius="4"
+                      Padding="0"
+                      Margin="0 0 20 20">
+            <GridViewItem.Transitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+            </GridViewItem.Transitions>
+            <Grid Width="400"
+                  Height="340"
+                  Margin="0"
+                  CornerRadius="4"
+                  RowDefinitions="auto, *">
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".2"
+                        Grid.RowSpan="10" />
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".5" />
+
+                <TextBlock Text="Two Color Area"
+                           Padding="0"
+                           HorizontalAlignment="Stretch"
+                           FontSize="16"
+                           Margin="10 5" />
+
+                <oxyplot:PlotView Model="{x:Bind ViewModel.TwoColorAreaSeriesModel, Mode=OneWay}"
+                                  Background="Transparent"
+                                  Margin="5"
+                                  Grid.Row="1" />
+            </Grid>
+        </GridViewItem>
+
+        <!-- Multi-Bar Series -->
+        <GridViewItem CornerRadius="4"
+                      Padding="0"
+                      Margin="0 0 20 20">
+            <GridViewItem.Transitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+            </GridViewItem.Transitions>
+            <Grid Width="400"
+                  Height="340"
+                  Margin="0"
+                  CornerRadius="4"
+                  RowDefinitions="auto, *">
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".2"
+                        Grid.RowSpan="10" />
+                <Border Margin="0"
+                        BorderThickness="0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Opacity=".5" />
+
+                <TextBlock Text="Multi-Bar Multi-Axis"
+                           Padding="0"
+                           HorizontalAlignment="Stretch"
+                           FontSize="16"
+                           Margin="10 5" />
+
+                <oxyplot:PlotView Model="{x:Bind ViewModel.MultiValueAxesBarModel, Mode=OneWay}"
+                                  Background="Transparent"
+                                  Margin="5"
+                                  Grid.Row="1" />
+            </Grid>
+        </GridViewItem>
     </GridView>
 </Page>
