@@ -108,8 +108,8 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
 
                 var outliers = values.Where(v => v > upperWhisker || v < lowerWhisker).ToList();
 
-                s1.Items.Add(new BoxPlotItem(x, lowerWhisker, firstQuartil, median, thirdQuartil, upperWhisker) 
-                { 
+                s1.Items.Add(new BoxPlotItem(x, lowerWhisker, firstQuartil, median, thirdQuartil, upperWhisker)
+                {
                     Outliers = outliers
                 });
             }

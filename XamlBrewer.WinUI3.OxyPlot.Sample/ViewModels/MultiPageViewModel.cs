@@ -85,7 +85,7 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
                 var cs = new ContourSeries
                 {
                     Color = OxyColors.Black,
-                    LabelBackground = OxyColors.White,
+                    LabelBackground = OxyColors.Transparent,
                     ColumnCoordinates = yy,
                     RowCoordinates = xx,
                     Data = peaksData
