@@ -49,6 +49,7 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
             helloWorldmodel = new PlotModel
             {
                 Title = "Hello WinUI 3",
+                PlotAreaBorderColor = OxyColors.Transparent,
                 Axes =
             {
                 new LinearAxis { Position = AxisPosition.Bottom },
@@ -71,6 +72,11 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
                 }
             }
             };
+
+            foreach (var axis in helloWorldmodel.Axes)
+            {
+                axis.AxislineStyle = LineStyle.Solid;
+            }
 
             const int boxes = 10;
 
@@ -118,6 +124,11 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
             boxPlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left });
             boxPlotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, MinimumPadding = 0.1, MaximumPadding = 0.1 });
 
+            foreach (var axis in boxPlotModel.Axes)
+            {
+                axis.AxislineStyle = LineStyle.Solid;
+            }
+
         }
 
         private static double GetMedian(IEnumerable<double> values)
@@ -164,7 +175,7 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
             if (theme == ElementTheme.Light)
             {
                 helloWorldmodel.TextColor = OxyColors.DimGray;
-                helloWorldmodel.PlotAreaBorderColor = OxyColors.DimGray;
+                // helloWorldmodel.PlotAreaBorderColor = OxyColors.DimGray;
                 foreach (var axis in helloWorldmodel.Axes)
                 {
                     axis.TicklineColor = OxyColors.DimGray;
@@ -177,7 +188,7 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
                 foreach (var axis in boxPlotModel.Axes)
                 {
                     axis.TicklineColor = OxyColors.DimGray;
-                    axis.AxislineColor = OxyColors.Red; // Doesn't seem to work.
+                    axis.AxislineColor = OxyColors.DimGray;
                     //axis.color
                 }
                 var series = boxPlotModel.Series[0] as BoxPlotSeries;
@@ -187,7 +198,7 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
             else
             {
                 helloWorldmodel.TextColor = OxyColors.Beige;
-                helloWorldmodel.PlotAreaBorderColor = OxyColors.Beige;
+                // helloWorldmodel.PlotAreaBorderColor = OxyColors.Beige;
                 foreach (var axis in helloWorldmodel.Axes)
                 {
                     axis.TicklineColor = OxyColors.Beige;
