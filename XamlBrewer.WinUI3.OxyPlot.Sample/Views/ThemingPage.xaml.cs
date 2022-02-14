@@ -7,6 +7,7 @@ using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using XamlBrewer.WinUI3.Services.Theming;
 
 namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
 {
@@ -30,13 +31,13 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            (Content as FrameworkElement).ActualThemeChanged += ThemingPage_ActualThemeChanged;
+            (Content as FrameworkElement).ActualThemeChanged += Page_ActualThemeChanged;
             base.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            (Content as FrameworkElement).ActualThemeChanged -= ThemingPage_ActualThemeChanged;
+            (Content as FrameworkElement).ActualThemeChanged -= Page_ActualThemeChanged;
             base.OnNavigatedFrom(e);
         }
 
@@ -81,6 +82,8 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
             const int boxes = 10;
 
             boxPlotModel = new PlotModel(); // (string.Format("BoxPlot (n={0})", boxes)) { LegendPlacement = LegendPlacement.Outside };
+
+            boxPlotModel.PlotAreaBorderColor = OxyColors.Transparent;
 
             var s1 = new BoxPlotSeries
             {
@@ -144,7 +147,7 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
             return 0.5 * sortedInterval[count / 2] + 0.5 * sortedInterval[(count / 2) - 1];
         }
 
-        private void ThemingPage_ActualThemeChanged(FrameworkElement sender, object args)
+        private void Page_ActualThemeChanged(FrameworkElement sender, object args)
         {
             ApplyTheme(sender.ActualTheme);
         }
@@ -171,55 +174,37 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
             // model.Legends[0].LegendTextColor
             // model.Legends[0].LegendTitleColor
             // model.Legends[0].LegendBackground
+            // ...
 
+            // Beware: Do not use OxyColors.Black and OxyColors.White.
+            // Their cached brushes are reversed, based on the Theme. Confusing!
+            var foreground = theme == ElementTheme.Light ? OxyColor.FromRgb(32, 32, 32) : OxyColors.WhiteSmoke;
+
+            helloWorldmodel.TextColor = foreground;
+            foreach (var axis in helloWorldmodel.Axes)
+            {
+                axis.TicklineColor = foreground;
+                axis.AxislineColor = foreground;
+            }
+
+            // There's room for an extension method ...
+            boxPlotModel.ApplyTheme(theme);
+
+            // Specific changes.
+            var series = boxPlotModel.Series[0] as BoxPlotSeries;
             if (theme == ElementTheme.Light)
             {
-                helloWorldmodel.TextColor = OxyColors.DimGray;
-                // helloWorldmodel.PlotAreaBorderColor = OxyColors.DimGray;
-                foreach (var axis in helloWorldmodel.Axes)
-                {
-                    axis.TicklineColor = OxyColors.DimGray;
-                    axis.AxislineColor = OxyColors.DimGray;
-                }
-                // model.DefaultColors = OxyPalettes.Cool(model.DefaultColors.Count).Colors;
-
-                boxPlotModel.TextColor = OxyColors.DimGray;
-                boxPlotModel.PlotAreaBorderColor = OxyColors.Transparent;
-                foreach (var axis in boxPlotModel.Axes)
-                {
-                    axis.TicklineColor = OxyColors.DimGray;
-                    axis.AxislineColor = OxyColors.DimGray;
-                    //axis.color
-                }
-                var series = boxPlotModel.Series[0] as BoxPlotSeries;
-                series.Stroke = OxyColors.LightSlateGray;
                 series.Fill = OxyColors.LightSteelBlue;
+                series.Stroke = OxyColors.LightSlateGray;
             }
             else
             {
-                helloWorldmodel.TextColor = OxyColors.Beige;
-                // helloWorldmodel.PlotAreaBorderColor = OxyColors.Beige;
-                foreach (var axis in helloWorldmodel.Axes)
-                {
-                    axis.TicklineColor = OxyColors.Beige;
-                    axis.AxislineColor = OxyColors.Beige;
-                }
-                // model.DefaultColors = OxyPalettes.Hot(model.DefaultColors.Count).Colors;
-
-                boxPlotModel.TextColor = OxyColors.Beige;
-                boxPlotModel.PlotAreaBorderColor = OxyColors.Transparent;
-                foreach (var axis in boxPlotModel.Axes)
-                {
-                    axis.TicklineColor = OxyColors.Beige;
-                    axis.AxislineColor = OxyColors.Beige;
-                }
-                var series = boxPlotModel.Series[0] as BoxPlotSeries;
                 series.Fill = OxyColors.LightSlateGray;
                 series.Stroke = OxyColors.LightSteelBlue;
             }
 
             helloWorldmodel.InvalidatePlot(false);
-            boxPlotModel.InvalidatePlot(true);
+            boxPlotModel.InvalidatePlot(false);
         }
     }
 }

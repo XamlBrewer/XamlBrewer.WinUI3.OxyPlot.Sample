@@ -15,7 +15,7 @@
           ColumnSpacing="5"
           RowSpacing="5">
         <oxy:PlotView Model="{x:Bind HelloWorldModel}"
-                      Background="Transparent"
+                      Background="Transparent" 
                       Grid.ColumnSpan="3">
             <oxy:PlotView.DefaultTrackerTemplate>
                 <ControlTemplate>
