@@ -15,35 +15,45 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
     {
         private PlotModel helloWorldmodel;
         private PlotModel boxPlotModel;
+        private PlotModel pieChartModel;
 
         public ThemingPage()
         {
             InitializeComponent();
             InitializePlotModel();
+            InitializePieChartModel();
 
             Loaded += ThemingPage_Loaded;
         }
 
         private void ThemingPage_Loaded(object sender, RoutedEventArgs e)
         {
-            ApplyTheme(/*(Content as FrameworkElement).*/ ActualTheme);
+            ApplyTheme(ActualTheme);
+
+            foreach (var slice in (pieChartModel.Series.First() as PieSeries).Slices)
+            {
+                var color = slice.ActualFillColor;
+                slice.Fill = OxyColor.FromArgb(90, color.R, color.G, color.B);
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            /* (Content as FrameworkElement).*/ ActualThemeChanged += Page_ActualThemeChanged;
+            ActualThemeChanged += Page_ActualThemeChanged;
             base.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            /* (Content as FrameworkElement).*/ ActualThemeChanged -= Page_ActualThemeChanged;
+            ActualThemeChanged -= Page_ActualThemeChanged;
             base.OnNavigatedFrom(e);
         }
 
         public PlotModel HelloWorldModel => helloWorldmodel;
 
         public PlotModel BoxPlotModel => boxPlotModel;
+
+        public PlotModel PieChartModel => pieChartModel;
 
         private void InitializePlotModel()
         {
@@ -134,6 +144,23 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
 
         }
 
+        private void InitializePieChartModel()
+        {
+            pieChartModel = new PlotModel(); // { Title = "Pie Sample1" };
+
+            pieChartModel.PlotAreaBorderColor = OxyColors.Transparent;
+            
+            var seriesP1 = new PieSeries { InsideLabelPosition = 0.8, AngleSpan = 360, StartAngle = 0 };
+
+            seriesP1.Slices.Add(new PieSlice("Africa", 1030) { IsExploded = false });
+            seriesP1.Slices.Add(new PieSlice("Americas", 929) { IsExploded = true });
+            seriesP1.Slices.Add(new PieSlice("Asia", 4157) { IsExploded = true });
+            seriesP1.Slices.Add(new PieSlice("Europe", 739) { IsExploded = true });
+            seriesP1.Slices.Add(new PieSlice("Oceania", 35) { IsExploded = true });
+
+            pieChartModel.Series.Add(seriesP1);
+        }
+
         private static double GetMedian(IEnumerable<double> values)
         {
             var sortedInterval = new List<double>(values);
@@ -190,6 +217,7 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
             // There's room for an extension method ...
             boxPlotModel.ApplyTheme(theme);
 
+
             // Specific changes.
             var series = boxPlotModel.Series[0] as BoxPlotSeries;
             if (theme == ElementTheme.Light)
@@ -202,6 +230,8 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
                 series.Fill = OxyColors.LightSlateGray;
                 series.Stroke = OxyColors.LightSteelBlue;
             }
+
+            pieChartModel.ApplyTheme(theme);
 
             helloWorldmodel.InvalidatePlot(false);
             boxPlotModel.InvalidatePlot(false);
