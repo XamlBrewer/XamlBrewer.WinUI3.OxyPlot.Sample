@@ -10,41 +10,41 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
 {
     internal partial class InteractivePageViewModel : ObservableObject
     {
-        private int value = 0;
+        private double variance = 0;
         private PlotModel model = new PlotModel();
 
         public InteractivePageViewModel()
         {
-            var barSeries = new BarSeries
-            {
-                ItemsSource = new List<BarItem>(),
-                LabelPlacement = LabelPlacement.Inside,
-                LabelFormatString = "{0:.00}%"
-            };
-
-            model.Series.Add(barSeries);
-
-            model.Axes.Add(new CategoryAxis
+            model.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Left,
-                Key = "CakeAxis",
-                ItemsSource = new[]
-                    {
-                        "Apple cake",
-                        "Baumkuchen",
-                        "Bundt Cake",
-                        "Chocolate cake",
-                        "Carrot cake"
-                    }
+                Minimum = -0.05,
+                Maximum = .95,
+                MajorStep = 0.2,
+                MinorStep = 0.05,
+                TickStyle = TickStyle.Inside
             });
+            model.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Bottom,
+                Minimum = -5,
+                Maximum = 5,
+                MajorStep = 1,
+                MinorStep = 0.25,
+                TickStyle = TickStyle.Inside
+            });
+
+            model.PlotAreaBorderColor = OxyColors.Transparent;
+
+            updateSeries();
         }
 
-        public int Value
+        public double Variance
         {
-            get => value;
+            get => variance;
             set
             {
-                SetProperty(ref value, value);
+                SetProperty(ref variance, value);
                 updateSeries();
             }
         }
@@ -53,27 +53,31 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
 
         private void updateSeries()
         {
-            //generate a random percentage distribution between the 5
-            //cake-types (see axis below)
-            var rand = new Random();
-            double[] cakePopularity = new double[5];
-            for (int i = 0; i < 5; ++i)
-            {
-                cakePopularity[i] = rand.NextDouble();
-            }
-
-            var sum = cakePopularity.Sum();
-
-            (model.Series.First() as BarSeries).ItemsSource = new List<BarItem>(new[]
-                {
-                    new BarItem{ Value = (cakePopularity[0] / sum * 100) },
-                    new BarItem{ Value = (cakePopularity[1] / sum * 100) },
-                    new BarItem{ Value = (cakePopularity[2] / sum * 100) },
-                    new BarItem{ Value = (cakePopularity[3] / sum * 100) },
-                    new BarItem{ Value = (cakePopularity[4] / sum * 100) }
-                });
+            model.Series.Clear();
+            model.Series.Add(CreateNormalDistributionSeries(-5, 5, Variance, 0.2));
+            model.Series.Add(CreateNormalDistributionSeries(-5, 5, -5, 5 + Variance));
+            model.Series.Add(CreateNormalDistributionSeries(-5, 5, 5, 5 - Variance));
 
             model.InvalidatePlot(true);
+        }
+
+        private static DataPointSeries CreateNormalDistributionSeries(double x0, double x1, double mean, double variance, int n = 100)
+        {
+            var ls = new StemSeries
+            {
+                // MarkerStroke = OxyColors.Green,
+                MarkerType = MarkerType.Circle,
+                Title = string.Format("μ={0}, σ²={1}", mean, variance)
+            };
+
+            for (int i = 0; i < n; i++)
+            {
+                double x = x0 + ((x1 - x0) * i / (n - 1));
+                double f = 1.0 / Math.Sqrt(2 * Math.PI * variance) * Math.Exp(-(x - mean) * (x - mean) / 2 / variance);
+                ls.Points.Add(new DataPoint(x, f));
+            }
+
+            return ls;
         }
     }
 }

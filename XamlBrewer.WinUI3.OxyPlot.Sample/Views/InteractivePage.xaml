@@ -17,9 +17,13 @@
           RowDefinitions="*, auto"
           ColumnSpacing="0"
           RowSpacing="10">
-        <oxyplot:PlotView Model="{x:Bind ViewModel.Model, Mode=OneWay}"
+        <oxyplot:PlotView Model="{x:Bind ViewModel.Model}"
                           Background="Transparent" />
-        <Slider Value="{x:Bind ViewModel.Value, Mode=TwoWay}"
+        <Slider Value="{x:Bind ViewModel.Variance, Mode=TwoWay}"
+                Minimum="-5"
+                Maximum="5"
+                StepFrequency=".25"
+                Margin="20 0 10 0"
                 Grid.Row="1" />
     </Grid>
 </Page>
