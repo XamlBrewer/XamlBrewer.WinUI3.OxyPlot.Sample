@@ -1,5 +1,5 @@
 # XamlBrewer.WinUI3.OxyPlot.Sample
-Sample demonstrating OxyPlot in a WinUI 3 Desktop application:
+Sample demonstrating [H.OxyPlot](https://github.com/HavenDV/H.OxyPlot) in a WinUI 3 Desktop application:
 * Hello World
 * Model Gallery
 * Interactive Model
