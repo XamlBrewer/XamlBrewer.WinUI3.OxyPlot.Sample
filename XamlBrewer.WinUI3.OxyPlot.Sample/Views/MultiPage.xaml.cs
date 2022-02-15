@@ -43,9 +43,12 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
             ViewModel.ContourSeriesModel.ApplyTheme(theme);
             ViewModel.FunctionSeriesModel.ApplyTheme(theme);
             ViewModel.LineAndAreaSeriesModel.ApplyTheme(theme);
+            ViewModel.LineSeriesModel.ApplyTheme(theme);
+            ViewModel.MultiValueAxesBarSeriesModel.ApplyTheme(theme);
             ViewModel.PieSeriesModel.ApplyTheme(theme);
             ViewModel.RectangularHeatMapSeriesModel.ApplyTheme(theme);
             ViewModel.StemSeriesModel.ApplyTheme(theme);
+            ViewModel.TwoColorAreaSeriesModel.ApplyTheme(theme);
         }
     }
 }

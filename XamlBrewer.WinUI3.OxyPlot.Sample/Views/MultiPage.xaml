@@ -346,7 +346,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.MultiValueAxesBarModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.MultiValueAxesBarSeriesModel, Mode=OneWay}"
                                   Background="Transparent"
                                   Margin="5"
                                   Grid.Row="1" />

@@ -22,9 +22,12 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
         private PlotModel contourSeriesModel;
         private PlotModel functionSeriesModel;
         private PlotModel lineAndAreaSeriesModel;
+        private PlotModel lineSeriesModel;
+        private PlotModel multiValueAxesBarSeriesModel;
         private PlotModel pieSeriesModel;
         private PlotModel rectangularHeatMapSeriesModel;
         private PlotModel stemSeriesModel;
+        private PlotModel twoColorAreaSeriesModel;
 
         public MultiPageViewModel()
         {
@@ -34,18 +37,29 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
             InitializeContourSeriesModel();
             InitializeFunctionSeriesModel();
             InitializeLineAndAreaSeriesModel();
+            InitializeLineSeriesModel();
+            InitializeMultiValueAxesBarSeriesModel();
             InitializePieSeriesModel();
             InitializeRectangularHeatmapSeriesModel();
             InitializeStemSeriesModel();
+            InitializeTwoColorAreaSeriesModel();
         }
+
+        public PlotModel AreaSeriesModel => areaSeriesModel;
 
         public PlotModel BarSeriesModel => barSeriesModel;
 
-        public PlotModel ContourSeriesModel => contourSeriesModel;
-
         public PlotModel BitmapHeatMapSeriesModel => bitmapHeatMapSeriesModel;
 
+        public PlotModel ContourSeriesModel => contourSeriesModel;
+
         public PlotModel FunctionSeriesModel => functionSeriesModel;
+        
+        public PlotModel LineAndAreaSeriesModel => lineAndAreaSeriesModel; 
+        
+        public PlotModel LineSeriesModel => lineSeriesModel;
+        
+        public PlotModel MultiValueAxesBarSeriesModel => multiValueAxesBarSeriesModel;
 
         public PlotModel PieSeriesModel => pieSeriesModel;
 
@@ -53,139 +67,8 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
 
         public PlotModel StemSeriesModel => stemSeriesModel;
 
-        public PlotModel TwoColorAreaSeriesModel
-        {
-            get
-            {
-                var model = new PlotModel(); // { Title = "TwoColorAreaSeries" };
+        public PlotModel TwoColorAreaSeriesModel => twoColorAreaSeriesModel;
 
-                model.PlotAreaBorderThickness = new OxyThickness(0);
-
-                //var l = new Legend
-                //{
-                //    LegendSymbolLength = 24
-                //};
-
-                //model.Legends.Add(l);
-
-                var s1 = new TwoColorAreaSeries
-                {
-                    // Title = "Temperature at Eidesmoen, December 1986.",
-                    TrackerFormatString = "December {2:0}: {4:0.0} °C",
-                    Color = OxyColors.Black,
-                    Color2 = OxyColors.Brown,
-                    MarkerFill = OxyColors.Red,
-                    Fill = OxyColors.Tomato,
-                    Fill2 = OxyColors.LightBlue,
-                    MarkerFill2 = OxyColors.Blue,
-                    MarkerStroke = OxyColors.Brown,
-                    MarkerStroke2 = OxyColors.Black,
-                    StrokeThickness = 2,
-                    Limit = 0,
-                    MarkerType = MarkerType.Circle,
-                    MarkerSize = 3,
-                };
-
-                var temperatures = new[] { 5, 0, 7, 7, 4, 3, 5, 5, 11, 4, 2, 3, 2, 1, 0, 2, -1, 0, 0, -3, -6, -13, -10, -10, 0, -4, -5, -4, 3, 0, -5 };
-
-                for (int i = 0; i < temperatures.Length; i++)
-                {
-                    s1.Points.Add(new DataPoint(i + 1, temperatures[i]));
-                }
-
-                model.Series.Add(s1);
-                model.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "Temperature", Unit = "°C", ExtraGridlines = new[] { 0.0 } });
-                model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "Date" });
-
-                return model;
-            }
-        }
-
-        public PlotModel MultiValueAxesBarModel
-        {
-            get
-            {
-                var model = new PlotModel(); // { Title = "Multiple Value Axes" };
-
-                model.PlotAreaBorderColor = OxyColors.Transparent;
-
-                model.DefaultColors = OxyPalettes.Viridis(4).Colors;
-
-                var categoryAxis = new CategoryAxis { Position = AxisPosition.Left };
-                var valueAxis1 = new LinearAxis { /* Title = "Value Axis 1", */ Position = AxisPosition.Bottom, MinimumPadding = 0.06, MaximumPadding = 0.06, ExtraGridlines = new[] { 0d }, EndPosition = .5, Key = "x1" };
-                var valueAxis2 = new LinearAxis { /* Title = "Value Axis 2", */ Position = AxisPosition.Bottom, MinimumPadding = 0.06, MaximumPadding = 0.06, ExtraGridlines = new[] { 0d }, StartPosition = .5, Key = "x2" };
-                model.Axes.Add(categoryAxis);
-                model.Axes.Add(valueAxis1);
-                model.Axes.Add(valueAxis2);
-
-                var series = new List<BarSeries>
-            {
-                new BarSeries { XAxisKey = "x1" },
-                new BarSeries { XAxisKey = "x1" },
-                new BarSeries { XAxisKey = "x2" },
-                new BarSeries { XAxisKey = "x2" },
-            };
-
-                var rnd = new Random(1);
-                foreach (var s in series)
-                {
-                    for (var i = 0; i < 4; i++)
-                    {
-                        s.Items.Add(new BarItem() { Value = rnd.Next(-100, 100) });
-                    }
-
-                    model.Series.Add(s);
-                }
-
-                return model;
-            }
-        }
-
-        public PlotModel LineSeriesModel
-        {
-            get
-            {
-
-                // http://en.wikipedia.org/wiki/Normal_distribution
-
-                var plot = new PlotModel
-                {
-                    //Title = "Normal distribution",
-                    //Subtitle = "Probability density function"
-                };
-
-                plot.Axes.Add(new LinearAxis
-                {
-                    Position = AxisPosition.Left,
-                    Minimum = -0.05,
-                    Maximum = 1.05,
-                    MajorStep = 0.2,
-                    MinorStep = 0.05,
-                    TickStyle = TickStyle.Inside
-                });
-                plot.Axes.Add(new LinearAxis
-                {
-                    Position = AxisPosition.Bottom,
-                    Minimum = -5.25,
-                    Maximum = 5.25,
-                    MajorStep = 1,
-                    MinorStep = 0.25,
-                    TickStyle = TickStyle.Inside
-                });
-                plot.Series.Add(CreateNormalDistributionSeries(-5, 5, 0, 0.2));
-                plot.Series.Add(CreateNormalDistributionSeries(-5, 5, 0, 1));
-                plot.Series.Add(CreateNormalDistributionSeries(-5, 5, 0, 5));
-                plot.Series.Add(CreateNormalDistributionSeries(-5, 5, -2, 0.5));
-
-                plot.PlotAreaBorderColor = OxyColors.Transparent;
-
-                return plot;
-            }
-        }
-
-        public PlotModel LineAndAreaSeriesModel => lineAndAreaSeriesModel;
-
-        public PlotModel AreaSeriesModel => areaSeriesModel;
 
         private static DataPointSeries CreateNormalDistributionSeries(double x0, double x1, double mean, double variance, int n = 1001)
         {
@@ -694,6 +577,78 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
             lineAndAreaSeriesModel.Series.Add(lineSeries1);
         }
 
+        private void InitializeLineSeriesModel()
+        {
+
+            // http://en.wikipedia.org/wiki/Normal_distribution
+
+            lineSeriesModel = new PlotModel
+            {
+                //Title = "Normal distribution",
+                //Subtitle = "Probability density function"
+            };
+
+            lineSeriesModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                Minimum = -0.05,
+                Maximum = 1.05,
+                MajorStep = 0.2,
+                MinorStep = 0.05,
+                TickStyle = TickStyle.Inside
+            });
+            lineSeriesModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Bottom,
+                Minimum = -5.25,
+                Maximum = 5.25,
+                MajorStep = 1,
+                MinorStep = 0.25,
+                TickStyle = TickStyle.Inside
+            });
+            lineSeriesModel.Series.Add(CreateNormalDistributionSeries(-5, 5, 0, 0.2));
+            lineSeriesModel.Series.Add(CreateNormalDistributionSeries(-5, 5, 0, 1));
+            lineSeriesModel.Series.Add(CreateNormalDistributionSeries(-5, 5, 0, 5));
+            lineSeriesModel.Series.Add(CreateNormalDistributionSeries(-5, 5, -2, 0.5));
+
+            lineSeriesModel.PlotAreaBorderColor = OxyColors.Transparent;
+        }
+
+        private void InitializeMultiValueAxesBarSeriesModel()
+        {
+            multiValueAxesBarSeriesModel = new PlotModel(); // { Title = "Multiple Value Axes" };
+
+            multiValueAxesBarSeriesModel.PlotAreaBorderColor = OxyColors.Transparent;
+
+            multiValueAxesBarSeriesModel.DefaultColors = OxyPalettes.Viridis(4).Colors;
+
+            var categoryAxis = new CategoryAxis { Position = AxisPosition.Left };
+            var valueAxis1 = new LinearAxis { /* Title = "Value Axis 1", */ Position = AxisPosition.Bottom, MinimumPadding = 0.06, MaximumPadding = 0.06, ExtraGridlines = new[] { 0d }, EndPosition = .5, Key = "x1" };
+            var valueAxis2 = new LinearAxis { /* Title = "Value Axis 2", */ Position = AxisPosition.Bottom, MinimumPadding = 0.06, MaximumPadding = 0.06, ExtraGridlines = new[] { 0d }, StartPosition = .5, Key = "x2" };
+            multiValueAxesBarSeriesModel.Axes.Add(categoryAxis);
+            multiValueAxesBarSeriesModel.Axes.Add(valueAxis1);
+            multiValueAxesBarSeriesModel.Axes.Add(valueAxis2);
+
+            var series = new List<BarSeries>
+            {
+                new BarSeries { XAxisKey = "x1" },
+                new BarSeries { XAxisKey = "x1" },
+                new BarSeries { XAxisKey = "x2" },
+                new BarSeries { XAxisKey = "x2" },
+            };
+
+            var rnd = new Random(1);
+            foreach (var s in series)
+            {
+                for (var i = 0; i < 4; i++)
+                {
+                    s.Items.Add(new BarItem() { Value = rnd.Next(-100, 100) });
+                }
+
+                multiValueAxesBarSeriesModel.Series.Add(s);
+            }
+        }
+
         private void InitializePieSeriesModel()
         {
             pieSeriesModel = new PlotModel(); // { Title = "Pie Sample1" };
@@ -813,6 +768,49 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
             sinStemSeries.Points.AddRange(sinData);
 
             stemSeriesModel.Series.Add(sinStemSeries);
+        }
+
+        private void InitializeTwoColorAreaSeriesModel()
+        {
+            twoColorAreaSeriesModel = new PlotModel(); // { Title = "TwoColorAreaSeries" };
+
+            twoColorAreaSeriesModel.PlotAreaBorderThickness = new OxyThickness(0);
+
+            //var l = new Legend
+            //{
+            //    LegendSymbolLength = 24
+            //};
+
+            //model.Legends.Add(l);
+
+            var s1 = new TwoColorAreaSeries
+            {
+                // Title = "Temperature at Eidesmoen, December 1986.",
+                TrackerFormatString = "December {2:0}: {4:0.0} °C",
+                Color = OxyColors.Black,
+                Color2 = OxyColors.Brown,
+                MarkerFill = OxyColors.Red,
+                Fill = OxyColors.Tomato,
+                Fill2 = OxyColors.LightBlue,
+                MarkerFill2 = OxyColors.Blue,
+                MarkerStroke = OxyColors.Brown,
+                MarkerStroke2 = OxyColors.Black,
+                StrokeThickness = 2,
+                Limit = 0,
+                MarkerType = MarkerType.Circle,
+                MarkerSize = 3,
+            };
+
+            var temperatures = new[] { 5, 0, 7, 7, 4, 3, 5, 5, 11, 4, 2, 3, 2, 1, 0, 2, -1, 0, 0, -3, -6, -13, -10, -10, 0, -4, -5, -4, 3, 0, -5 };
+
+            for (int i = 0; i < temperatures.Length; i++)
+            {
+                s1.Points.Add(new DataPoint(i + 1, temperatures[i]));
+            }
+
+            twoColorAreaSeriesModel.Series.Add(s1);
+            twoColorAreaSeriesModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "Temperature", Unit = "°C", ExtraGridlines = new[] { 0.0 } });
+            twoColorAreaSeriesModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "Date" });
         }
     }
 }
