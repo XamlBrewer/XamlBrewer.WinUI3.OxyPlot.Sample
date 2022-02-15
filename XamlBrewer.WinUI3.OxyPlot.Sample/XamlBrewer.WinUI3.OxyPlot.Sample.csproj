@@ -36,9 +36,9 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0-preview1" />
-    <PackageReference Include="H.OxyPlot.WinUI" Version="0.9.18" />
+    <PackageReference Include="H.OxyPlot.WinUI" Version="0.9.19" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22543-preview" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
