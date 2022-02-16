@@ -7,9 +7,18 @@
       mc:Ignorable="d"
       Background="Transparent">
 
-    <Grid Margin="0 0 0 80"
+    <Grid Margin="40 40 20 80"
           ColumnSpacing="0"
           RowSpacing="0">
-
+        <TextBlock FontSize="20">
+            <Run Text="Sample demonstrating " /><Hyperlink NavigateUri="https://github.com/HavenDV/H.OxyPlot">H.OxyPlot</Hyperlink><Run Text=" in a WinUI 3 Desktop application:" />
+            <LineBreak />
+            <Run>* Hello World</Run><LineBreak />
+            <Run>* Model Gallery</Run><LineBreak />
+            <Run>* Interactive Model</Run><LineBreak />
+            <Run>* Theming</Run><LineBreak />
+            <LineBreak /><LineBreak />
+            <Run Text="All diagrams are from the " /><Hyperlink NavigateUri="https://github.com/oxyplot/oxyplot/tree/develop/Source/Examples">official OxyPlot Samples</Hyperlink><Run>.</Run>
+        </TextBlock>
     </Grid>
 </Page>
