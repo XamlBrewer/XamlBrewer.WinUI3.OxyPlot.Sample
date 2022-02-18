@@ -15,18 +15,18 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            ApplyTheme(/* (Content as FrameworkElement).*/ ActualTheme);
+            ApplyTheme(ActualTheme);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            /* (Content as FrameworkElement).*/ ActualThemeChanged += Page_ActualThemeChanged;
+            ActualThemeChanged += Page_ActualThemeChanged;
             base.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            /* (Content as FrameworkElement).*/ ActualThemeChanged -= Page_ActualThemeChanged;
+            ActualThemeChanged -= Page_ActualThemeChanged;
             base.OnNavigatedFrom(e);
         }
 

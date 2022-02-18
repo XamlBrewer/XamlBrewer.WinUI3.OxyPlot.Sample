@@ -149,7 +149,7 @@ namespace XamlBrewer.WinUI3.OxyPlot.Sample.Views
             pieChartModel = new PlotModel(); // { Title = "Pie Sample1" };
 
             pieChartModel.PlotAreaBorderColor = OxyColors.Transparent;
-            
+
             var seriesP1 = new PieSeries { InsideLabelPosition = 0.8, AngleSpan = 360, StartAngle = 0 };
 
             seriesP1.Slices.Add(new PieSlice("Africa", 1030) { IsExploded = false });

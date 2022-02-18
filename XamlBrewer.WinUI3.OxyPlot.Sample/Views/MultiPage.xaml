@@ -55,7 +55,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.BarSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.BarSeriesModel}"
                                   Background="Transparent"
                                   Grid.Row="1" />
             </Grid>
@@ -91,7 +91,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.BitmapHeatMapSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.BitmapHeatMapSeriesModel}"
                                   Background="Transparent"
                                   Grid.Row="1" />
             </Grid>
@@ -127,7 +127,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.RectangularHeatMapSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.RectangularHeatMapSeriesModel}"
                                   Background="Transparent"
                                   Grid.Row="1" />
             </Grid>
@@ -163,7 +163,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.ContourSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.ContourSeriesModel}"
                                   Background="Transparent"
                                   Grid.Row="1" />
             </Grid>
@@ -199,7 +199,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.FunctionSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.FunctionSeriesModel}"
                                   Background="Transparent"
                                   Grid.Row="1" />
             </Grid>
@@ -235,7 +235,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.StemSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.StemSeriesModel}"
                                   Background="Transparent"
                                   Margin="5"
                                   Grid.Row="1" />
@@ -272,7 +272,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.PieSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.PieSeriesModel}"
                                   Background="Transparent"
                                   Margin="5"
                                   Grid.Row="1" />
@@ -309,7 +309,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.TwoColorAreaSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.TwoColorAreaSeriesModel}"
                                   Background="Transparent"
                                   Margin="5"
                                   Grid.Row="1" />
@@ -346,7 +346,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.MultiValueAxesBarSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.MultiValueAxesBarSeriesModel}"
                                   Background="Transparent"
                                   Margin="5"
                                   Grid.Row="1" />
@@ -383,7 +383,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.LineSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.LineSeriesModel}"
                                   Background="Transparent"
                                   Margin="5"
                                   Grid.Row="1" />
@@ -420,7 +420,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.LineAndAreaSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.LineAndAreaSeriesModel}"
                                   Background="Transparent"
                                   Margin="5"
                                   Grid.Row="1" />
@@ -457,7 +457,7 @@
                            FontSize="16"
                            Margin="10 5" />
 
-                <oxyplot:PlotView Model="{x:Bind ViewModel.AreaSeriesModel, Mode=OneWay}"
+                <oxyplot:PlotView Model="{x:Bind ViewModel.AreaSeriesModel}"
                                   Background="Transparent"
                                   Margin="5"
                                   Grid.Row="1" />

@@ -3,8 +3,6 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace XamlBrewer.WinUI3.OxyPlot.Sample.ViewModels
 {
