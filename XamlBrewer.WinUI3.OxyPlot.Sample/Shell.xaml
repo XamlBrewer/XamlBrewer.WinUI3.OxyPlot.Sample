@@ -21,10 +21,10 @@
                         Background="Transparent"
                         IsSettingsVisible="False"
                         Margin="0">
-            <!--<NavigationView.PaneCustomContent>
-                <HyperlinkButton NavigateUri="https://xamlbrewer.wordpress.com"
+            <NavigationView.PaneCustomContent>
+                <HyperlinkButton NavigateUri="https://github.com/XamlBrewer/XamlBrewer.WinUI3.OxyPlot.Sample"
                                  Margin="8 0">Blog post</HyperlinkButton>
-            </NavigationView.PaneCustomContent>-->
+            </NavigationView.PaneCustomContent>
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Home"
                                     Tag="XamlBrewer.WinUI3.OxyPlot.Sample.Views.HomePage"
